@@ -18,9 +18,17 @@
     <%= f.text_area :content %><br>
     Tags:
   </div>
-
+  
+  # STEP 3
+  # step three add this there guy to the posts form
+  # need to tell the fields_for what you want it to build @post.tags.build
+  
   <div class="field">
     <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %><br>
+    <%= f.fields_for :tags, @tags do |tag| %> 
+      <%= tag.label :name %>
+      <%= tag.text_field :name %>
+    <% end %>
   </div>
 
   <div class="actions">

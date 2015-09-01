@@ -12,9 +12,13 @@ class PostsController < ApplicationController
   def show
   end
 
+  ## STEP 4 add @post.tags.build to the new action
+  # @post.tags.build({name: "ryan"})
+
   # GET /posts/new
   def new
     @post = Post.new
+    @tags = @post.tags.build
   end
 
   # GET /posts/1/edit
@@ -66,8 +70,10 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
+    # This is step 2, add :tag_aattributes => [:name] to the params of post
     # Never trust parameters from the scary internet, only allow the white list through.
+    # This must be plural
     def post_params
-      params.require(:post).permit(:name, :content, :tag_ids => [])
+      params.require(:post).permit(:name, :content, :tag_ids => [], :tags_attributes => [:name])
     end
 end
